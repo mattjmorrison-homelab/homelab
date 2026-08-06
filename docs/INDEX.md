@@ -25,3 +25,4 @@ Secrets flow: OpenBao stores secrets → External Secrets Operator syncs them in
 | [homelab-openbao](https://github.com/mattjmorrison/homelab-openbao) | OpenBao (open-source Vault) — stores all cluster secrets |
 | [homelab-external-secrets](https://github.com/mattjmorrison/homelab-external-secrets) | External Secrets Operator — syncs OpenBao secrets into Kubernetes Secrets |
 | [homelab-external-secrets-crds](https://github.com/mattjmorrison/homelab-external-secrets-crds) | External Secrets Operator CRDs — installed separately due to size |
+| [homelab-home-assistant](https://github.com/mattjmorrison/homelab-home-assistant) | Home Assistant — home automation platform with local device discovery |
