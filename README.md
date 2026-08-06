@@ -1,6 +1,6 @@
 # Homelab
 
-NixOS configuration for a home k3s cluster.
+NixOS configuration for a home k3s cluster. → [Homelab Docs](docs/INDEX.md)
 
 ## Structure
 
