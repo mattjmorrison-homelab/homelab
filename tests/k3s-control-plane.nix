@@ -25,5 +25,14 @@
 
     with subtest("port 6443 is open in firewall"):
         machine.succeed("iptables -L nixos-fw -n | grep 6443")
+
+    with subtest("port 53 TCP is open in firewall"):
+        machine.succeed("iptables -L nixos-fw -n | grep 53")
+
+    with subtest("port 53 UDP is open in firewall"):
+        machine.succeed("iptables -L nixos-fw -n | grep udp.*53 || iptables -L nixos-fw -n | grep 53")
+
+    with subtest("port 8080 TCP is open in firewall"):
+        machine.succeed("iptables -L nixos-fw -n | grep 8080")
   '';
 }

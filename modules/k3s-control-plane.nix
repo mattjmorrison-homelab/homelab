@@ -12,5 +12,6 @@
   environment.variables.KUBECONFIG = "/etc/rancher/k3s/k3s.yaml";
 
   # Workers and external clients reach the API server on this port
-  networking.firewall.allowedTCPPorts = [ 6443 ];
+  networking.firewall.allowedTCPPorts = [ 53 6443 8080 ];
+  networking.firewall.allowedUDPPorts = [ 53 ];
 }

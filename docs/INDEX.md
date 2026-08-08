@@ -4,16 +4,22 @@ This homelab runs a k3s Kubernetes cluster across several machines, all managed 
 
 ## Architecture
 
-```
+```text
 NixOS (homelab) → k3s cluster → ArgoCD (homelab-argocd) → services (homelab-apps → homelab-*)
 ```
 
 Secrets flow: OpenBao stores secrets → External Secrets Operator syncs them into Kubernetes Secrets → apps consume them.
 
+## Docs
+
+- [Cluster](cluster.md) — node inventory, Pi 5 agent node setup plan
+- [Networking](networking.md) — current network layout and planned architecture
+- [TODOs](todos.md) — general homelab improvements to revisit
+
 ## Repos
 
 | Repo | Description |
-|---|---|
+| --- | --- |
 | [homelab](https://github.com/mattjmorrison/homelab) | NixOS modules and integration tests for cluster hosts |
 | [homelab-apps](https://github.com/mattjmorrison/homelab-apps) | ArgoCD App of Apps — one Application manifest per deployed service |
 | [homelab-argocd](https://github.com/mattjmorrison/homelab-argocd) | Bootstrap manifests to install ArgoCD; run once |
