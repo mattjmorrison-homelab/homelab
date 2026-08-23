@@ -17,4 +17,14 @@
   # 8472/udp: flannel VXLAN (node-to-node)
   networking.firewall.allowedTCPPorts = [ 53 6443 8080 443 10250 ];
   networking.firewall.allowedUDPPorts = [ 53 8472 ];
+
+  # Clamp TCP MSS to PMTU on flannel.1 forwarded traffic. Some external
+  # endpoints (e.g. Azure Front Door IPs) blackhole ICMP
+  # fragmentation-needed messages, so PMTUD never kicks in and oversized
+  # segments over the VXLAN overlay just get dropped. This rewrites the MSS
+  # in the TCP handshake so pods never send segments larger than the path
+  # can carry.
+  networking.firewall.extraCommands = ''
+    iptables -t mangle -A FORWARD -o flannel.1 -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
+  '';
 }
