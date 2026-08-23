@@ -17,17 +17,4 @@
   # 8472/udp: flannel VXLAN (node-to-node)
   networking.firewall.allowedTCPPorts = [ 53 6443 8080 443 10250 ];
   networking.firewall.allowedUDPPorts = [ 53 8472 ];
-
-  # Clamp TCP MSS to PMTU on all forwarded traffic. Some external endpoints
-  # (e.g. Azure Front Door IPs) blackhole ICMP fragmentation-needed messages,
-  # so PMTUD never kicks in and oversized segments just get dropped. This
-  # affects both cross-node pod-to-pod traffic over the flannel.1 VXLAN
-  # overlay and pod-to-internet traffic, which on this node (imac, the
-  # cluster's only schedulable node) egresses via the physical NIC with
-  # SNAT/MASQUERADE and never touches flannel.1 at all. The rule is left
-  # unscoped (no -o interface match) rather than hardcoded to either
-  # interface, so it covers both paths.
-  networking.firewall.extraCommands = ''
-    iptables -t mangle -A FORWARD -p tcp -m tcp --tcp-flags SYN,RST SYN -j TCPMSS --clamp-mss-to-pmtu
-  '';
 }

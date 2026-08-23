@@ -41,9 +41,6 @@
     with subtest("port 8472 UDP is open in firewall"):
         machine.succeed("iptables -L nixos-fw -n | grep udp.*8472 || iptables -L nixos-fw -n | grep 8472")
 
-    with subtest("TCP MSS is clamped to PMTU for all forwarded traffic (not just flannel.1)"):
-        machine.succeed("iptables -t mangle -S FORWARD | grep -i SYN | grep -i clamp-mss-to-pmtu | grep -v -- '-o '")
-
     with subtest("port 10250 TCP is open in firewall"):
         machine.succeed("iptables -L nixos-fw -n | grep 10250")
   '';
